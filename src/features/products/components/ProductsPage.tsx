@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { ProductBreadcrumbs } from "@/features/products/components/ProductBreadcrumbs";
 import { ProductFilters } from "@/features/products/components/ProductFilters";
 import { ProductGrid } from "@/features/products/components/ProductGrid";
@@ -10,11 +11,14 @@ import type { ProductSearchParams } from "@/features/products/types/product.type
 import { parseProductListQuery } from "@/features/products/utils/product.utils";
 
 type ProductsPageProps = {
-  searchParams: ProductSearchParams;
+  searchParams?: ProductSearchParams;
 };
 
 export function ProductsPage({ searchParams }: ProductsPageProps) {
-  const query = parseProductListQuery(searchParams);
+  const currentSearchParams = useSearchParams();
+  const resolvedSearchParams =
+    searchParams ?? Object.fromEntries(currentSearchParams.entries());
+  const query = parseProductListQuery(resolvedSearchParams);
   const productsQuery = useProducts(query);
 
   return (

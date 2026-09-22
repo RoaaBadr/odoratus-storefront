@@ -1,11 +1,10 @@
+import { Suspense } from "react";
 import { ProductsPage } from "@/features/products";
-import type { ProductSearchParams } from "@/features/products";
 
-export default async function ProductsRoute({
-  searchParams,
-}: {
-  searchParams: Promise<ProductSearchParams>;
-}) {
-  const params = await searchParams;
-  return <ProductsPage searchParams={params} />;
+export default function ProductsRoute() {
+  return (
+    <Suspense fallback={<p className="p-8 text-sm">Loading products...</p>}>
+      <ProductsPage />
+    </Suspense>
+  );
 }

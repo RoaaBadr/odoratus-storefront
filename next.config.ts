@@ -1,13 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  output: 'export',
+  output: "export",
   images: {
     unoptimized: true,
   },
-  basePath: '/odoratus-storefront',
-  assetPrefix: '/odoratus-storefront/',
+  basePath:
+    process.env.NEXT_PUBLIC_BASE_PATH ??
+    (process.env.NODE_ENV === "production" ? "/odoratus-storefront" : ""),
+  assetPrefix:
+    process.env.NEXT_PUBLIC_BASE_PATH ??
+    (process.env.NODE_ENV === "production" ? "/odoratus-storefront/" : ""),
 };
 
 export default nextConfig;
