@@ -28,6 +28,7 @@ export function ProductImages({ product }: ProductImagesProps) {
     <div className="flex w-full flex-col gap-4">
       <div className="relative h-[360px] overflow-hidden rounded-lg sm:h-[480px] lg:h-[600px]">
         <Image
+          key={image}
           src={image}
           alt={product.name}
           fill
